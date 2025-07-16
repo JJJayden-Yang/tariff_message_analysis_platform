@@ -1,4 +1,4 @@
-# COMP90024 Team 72 Project
+# Tariff_message_analysis_platform
 ## Video resources
 Youtube Link:
 https://www.youtube.com/playlist?list=PLBGy6cO3iY4JJfzsyCUD9kTY9J9CzDUBh
