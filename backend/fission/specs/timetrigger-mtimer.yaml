@@ -1,0 +1,11 @@
+apiVersion: fission.io/v1
+kind: TimeTrigger
+metadata:
+  creationTimestamp: null
+  name: mtimer
+spec:
+  cron: '@every 2h'
+  functionref:
+    functionweights: null
+    name: refresh
+    type: name

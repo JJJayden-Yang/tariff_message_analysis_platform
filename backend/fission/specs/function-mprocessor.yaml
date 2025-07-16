@@ -1,0 +1,52 @@
+include:
+- ./mprocessor.js
+kind: ArchiveUploadSpec
+name: mprocessor-js-kL2W
+
+---
+apiVersion: fission.io/v1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: mprocessor-765b3a62-9644-4fc9-a0ca-c77f4d7c774a
+spec:
+  deployment:
+    checksum: {}
+    type: url
+    url: archive://mprocessor-js-kL2W
+  environment:
+    name: nodejs
+    namespace: ""
+  source:
+    checksum: {}
+status:
+  buildstatus: none
+  lastUpdateTimestamp: "2025-05-12T09:53:08Z"
+
+---
+apiVersion: fission.io/v1
+kind: Function
+metadata:
+  creationTimestamp: null
+  name: mprocessor
+spec:
+  InvokeStrategy:
+    ExecutionStrategy:
+      ExecutorType: poolmgr
+      MaxScale: 0
+      MinScale: 0
+      SpecializationTimeout: 120
+      TargetCPUPercent: 0
+    StrategyType: execution
+  concurrency: 500
+  environment:
+    name: nodejs
+    namespace: ""
+  functionTimeout: 120
+  idletimeout: 120
+  package:
+    packageref:
+      name: mprocessor-765b3a62-9644-4fc9-a0ca-c77f4d7c774a
+      namespace: ""
+  requestsPerPod: 1
+  resources: {}

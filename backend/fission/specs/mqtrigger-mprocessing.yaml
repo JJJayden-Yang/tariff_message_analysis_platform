@@ -1,0 +1,25 @@
+apiVersion: fission.io/v1
+kind: MessageQueueTrigger
+metadata:
+  creationTimestamp: null
+  name: mprocessing
+spec:
+  contentType: application/json
+  cooldownPeriod: 300
+  errorTopic: errors
+  functionref:
+    functionweights: null
+    name: mprocessor
+    type: name
+  maxReplicaCount: 100
+  maxRetries: 3
+  messageQueueType: redis
+  metadata:
+    address: redis-headless.redis.svc.cluster.local:6379
+    listLength: "100"
+    listName: mdata
+  minReplicaCount: 0
+  mqtkind: keda
+  pollingInterval: 30
+  respTopic: moutputdata
+  topic: mdata

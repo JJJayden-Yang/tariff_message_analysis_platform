@@ -1,0 +1,28 @@
+include:
+- ./addmoutputdata/__init__.py
+- ./addmoutputdata/addmoutputdata.py
+- ./addmoutputdata/requirements.txt
+- ./addmoutputdata/build.sh
+kind: ArchiveUploadSpec
+name: addmoutputdata---init---py-lov1
+
+---
+apiVersion: fission.io/v1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: addmoutputdata
+spec:
+  buildcmd: ./build.sh
+  deployment:
+    checksum: {}
+  environment:
+    name: python
+    namespace: ""
+  source:
+    checksum: {}
+    type: url
+    url: archive://addmoutputdata---init---py-lov1
+status:
+  buildstatus: pending
+  lastUpdateTimestamp: "2025-05-13T01:35:45Z"

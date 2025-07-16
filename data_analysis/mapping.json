@@ -1,0 +1,99 @@
+{
+  "mappings": {
+    "properties": {
+      "author": {
+        "properties": {
+          "acct": {"type": "keyword"},
+          "display_name": {"type": "text", "fields": {"keyword": {"type": "keyword", "ignore_above": 256}}},
+          "domain": {"type": "keyword"},
+          "join_date": {"type": "date"},
+          "profile_url": {"type": "keyword"},
+          "status": {
+            "properties": {
+              "label": {"type": "keyword"},
+              "score": {"type": "float"}
+            }
+          }
+        }
+      },
+      "content": {
+        "properties": {
+          "hashtags": {"type": "text", "fields": {"keyword": {"type": "keyword"}}, "analyzer": "hashtag_analyzer"},
+          "mentions": {"type": "keyword"},
+          "text": {"type": "text", "analyzer": "standard"},
+          "word_count": {"type": "integer"}
+        }
+      },
+      "engagement": {
+        "properties": {
+          "favorites": {
+            "type": "nested",
+            "properties": {
+              "Domain": {"type": "keyword"},
+              "acct": {"type": "keyword"},
+              "created_time": {"type": "date"},
+              "display_name": {"type": "text"},
+              "note": {"type": "text"},
+              "region": {"type": "keyword"},
+              "url": {"type": "keyword"},
+              "status": {"properties": {"label": {"type": "keyword"}}}
+            }
+          },
+          "reblogs": {
+            "type": "nested",
+            "properties": {
+              "Domain": {"type": "keyword"},
+              "acct": {"type": "keyword"},
+              "created_time": {"type": "date"},
+              "display_name": {"type": "text"},
+              "note": {"type": "text"},
+              "region": {"type": "keyword"},
+              "url": {"type": "keyword"},
+              "status": {"properties": {"label": {"type": "keyword"}}}
+            }
+          },
+          "replies": {
+            "type": "nested",
+            "properties": {
+              "Domain": {"type": "keyword"},
+              "acct": {"type": "keyword"},
+              "content": {"type": "text"},
+              "created_time": {"type": "date"},
+              "display_name": {"type": "text"},
+              "language": {"type": "text", "fields": {"keyword": {"type": "keyword", "ignore_above": 256}}},
+              "note": {"type": "text"},
+              "region": {"type": "keyword"},
+              "url": {"type": "keyword"},
+              "status": {"properties": {"label": {"type": "keyword"}}}
+            }
+          },
+          "interaction_counts": {
+            "properties": {
+              "favorites_count": {"type": "integer"},
+              "reblogs_count": {"type": "integer"},
+              "replies_count": {"type": "integer"}
+            }
+          }
+        }
+      },
+      "metadata": {
+        "properties": {
+          "created_time": {"type": "date"},
+          "language": {"type": "keyword"},
+          "post_id": {"type": "keyword"},
+          "processed_at": {"type": "date"},
+          "region": {"type": "keyword"},
+          "url": {"type": "keyword"}
+        }
+      }
+    }
+  },
+  "settings": {
+    "index": {
+      "routing": {"allocation": {"include": {"_tier_preference": "data_content"}}},
+      "number_of_shards": "3",
+      "number_of_replicas": "1",
+      "analysis": {"analyzer": {"hashtag_analyzer": {"filter": ["lowercase"], "type": "custom", "tokenizer": "keyword"}}}
+    }
+  }
+}
